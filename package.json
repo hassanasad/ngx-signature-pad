@@ -1,5 +1,5 @@
 {
-  "name": "angular2-signaturepad",
+  "name": "ngx-signaturepad",
   "version": "4.0.1",
   "scripts": {
     "ng": "ng",

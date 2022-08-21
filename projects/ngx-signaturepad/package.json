@@ -1,10 +1,10 @@
 {
-  "name": "angular2-signaturepad",
-  "version": "3.0.5",
-  "description": "Angular2 Component wrapper for szimek / signature_pad",
+  "name": "ngx-signaturepad",
+  "version": "4.0.5",
+  "description": "Angular Component wrapper for szimek / signature_pad",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wulfsolter/angular2-signaturepad.git"
+    "url": "git+https://github.com/hassanasad/ngx-signaturepad.git"
   },
   "keywords": [
     "signature",
@@ -15,9 +15,9 @@
   "author": "Wulf Solter <wulf@wulf.co.nz> (http://wulf.co.nz)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wulfsolter/angular2-signaturepad/issues"
+    "url": "https://github.com/hassanasad/ngx-signaturepad/issues"
   },
-  "homepage": "https://github.com/wulfsolter/angular2-signaturepad#readme",
+  "homepage": "https://github.com/hassanasad/ngx-signaturepad#readme",
   "peerDependencies": {
     "@angular/common": "^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0",
     "@angular/core": "^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0",
