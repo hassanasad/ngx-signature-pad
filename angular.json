@@ -3,30 +3,30 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-signaturepad": {
+    "ngx-signature-pad": {
       "projectType": "library",
-      "root": "projects/ngx-signaturepad",
-      "sourceRoot": "projects/ngx-signaturepad/src",
+      "root": "projects/ngx-signature-pad",
+      "sourceRoot": "projects/ngx-signature-pad/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/ngx-signaturepad/tsconfig.lib.json",
-            "project": "projects/ngx-signaturepad/ng-package.json"
+            "tsConfig": "projects/ngx-signature-pad/tsconfig.lib.json",
+            "project": "projects/ngx-signature-pad/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ngx-signaturepad/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ngx-signature-pad/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ngx-signaturepad/src/test.ts",
-            "tsConfig": "projects/ngx-signaturepad/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-signaturepad/karma.conf.js"
+            "main": "projects/ngx-signature-pad/src/test.ts",
+            "tsConfig": "projects/ngx-signature-pad/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-signature-pad/karma.conf.js"
           }
         }
       }

@@ -1,11 +1,11 @@
 # Forked Project
 THIS IS A FORKED PROJECT FROM THE ORIGINAL REPO
 
-# ngx-signaturepad
+# ngx-signature-pad
 Angular component for [szimek/signature_pad](https://www.npmjs.com/package/signature_pad).
 
 ## Install
-`npm install ngx-signaturepad --save`
+`npm install @viablelogic/ngx-signature-pad`
 
 ## Reference Implementation
 
@@ -25,7 +25,7 @@ The above options are provided to avoid accessing the DOM directly from your com
 
 // import into app module
 
-import { SignaturePadModule } from 'ngx-signaturepad';
+import { SignaturePadModule } from '@viablelogic/ngx-signature-pad';
 
 ...
 
@@ -39,7 +39,7 @@ import { SignaturePadModule } from 'ngx-signaturepad';
 // then import for use in a component
 
 import { Component, ViewChild } from '@angular/core';
-import { SignaturePad } from 'ngx-signaturepad/signature-pad';
+import { SignaturePad } from '@viablelogic/ngx-signature-pad/signature-pad';
 
 @Component({
   template: '<signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>'

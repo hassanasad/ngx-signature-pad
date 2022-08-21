@@ -1,10 +1,11 @@
-# angular2-signaturepad
-Angular 2 component for [szimek/signature_pad](https://www.npmjs.com/package/signature_pad).
+# Forked Project
+THIS IS A FORKED PROJECT FROM THE ORIGINAL REPO
 
-<< THIS IS NO LONGER IN USE BY OWNER. PROBLEMS CAN AND DO EXIST. PRs ARE SUPER WELCOME, BUT I CAN NOT IDENTIFY WHAT YOUR ISSUES ARE, NOR WILL I CHANGE THINGS BECAUSE ANGULAR HAS CHANGED IN THE YEARS SINCE I WROTE THIS >>
+# ngx-signature-pad
+Angular component for [szimek/signature_pad](https://www.npmjs.com/package/signature_pad).
 
 ## Install
-`npm install angular2-signaturepad --save`
+`npm install @viablelogic/ngx-signature-pad`
 
 ## Reference Implementation
 
@@ -24,7 +25,7 @@ The above options are provided to avoid accessing the DOM directly from your com
 
 // import into app module
 
-import { SignaturePadModule } from 'angular2-signaturepad';
+import { SignaturePadModule } from '@viablelogic/ngx-signature-pad';
 
 ...
 
@@ -37,8 +38,8 @@ import { SignaturePadModule } from 'angular2-signaturepad';
 
 // then import for use in a component
 
-import { Component, ViewChild } from 'angular2/core';
-import { SignaturePad } from 'angular2-signaturepad/signature-pad';
+import { Component, ViewChild } from '@angular/core';
+import { SignaturePad } from '@viablelogic/ngx-signature-pad/signature-pad';
 
 @Component({
   template: '<signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>'
@@ -48,7 +49,7 @@ export class SignaturePadPage{
 
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
 
-  private signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
+  signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
     'minWidth': 5,
     'canvasWidth': 500,
     'canvasHeight': 300
