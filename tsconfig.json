@@ -13,9 +13,9 @@
     "module": "es2020",
     "lib": ["es2020", "dom"],
     "paths": {
-      "ngx-signaturepad": [
-        "dist/ngx-signaturepad/ngx-signaturepad",
-        "dist/ngx-signaturepad"
+      "ngx-signature-pad": [
+        "dist/ngx-signature-pad/ngx-signature-pad",
+        "dist/ngx-signature-pad"
       ]
     }
   },
