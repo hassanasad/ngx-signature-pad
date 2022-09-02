@@ -1,13 +1,4 @@
-import {
-  AfterContentInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  OnDestroy,
-} from '@angular/core';
-
+import { AfterContentInit, Component, ElementRef, EventEmitter, Input, Output, OnDestroy } from '@angular/core';
 import * as SignaturePadNative from 'signature_pad';
 
 export interface Point {
@@ -24,8 +15,8 @@ export type PointGroup = Array<Point>;
 })
 export class SignaturePad implements AfterContentInit, OnDestroy {
   @Input() public options: any;
-  @Output() public onBeginEvent: EventEmitter<boolean>;
-  @Output() public onEndEvent: EventEmitter<boolean>;
+  @Output() public onBeginEvent = new EventEmitter<boolean>();
+  @Output() public onEndEvent = new EventEmitter<boolean>();
 
   private signaturePad: any;
   private elementRef: ElementRef;
@@ -34,8 +25,6 @@ export class SignaturePad implements AfterContentInit, OnDestroy {
     // no op
     this.elementRef = elementRef;
     this.options = this.options || {};
-    this.onBeginEvent = new EventEmitter();
-    this.onEndEvent = new EventEmitter();
   }
 
   public ngAfterContentInit(): void {
@@ -50,14 +39,17 @@ export class SignaturePad implements AfterContentInit, OnDestroy {
     }
 
     this.signaturePad = new SignaturePadNative.default(canvas, this.options);
-    this.signaturePad.onBegin = this.onBegin.bind(this);
-    this.signaturePad.onEnd = this.onEnd.bind(this);
+    this.signaturePad.addEventListener('beginStroke', this.onBegin.bind(this), { once: true });
+    this.signaturePad.addEventListener('endStroke', this.onEnd.bind(this), { once: true });
   }
 
   public ngOnDestroy(): void {
     const canvas: any = this.elementRef.nativeElement.querySelector('canvas');
     canvas.width = 0;
     canvas.height = 0;
+
+    this.signaturePad.removeEventListener('beginStroke', this.onBegin);
+    this.signaturePad.removeEventListener('endStroke', this.onEnd);
   }
 
   public resizeCanvas(): void {
