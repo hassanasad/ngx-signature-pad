@@ -1,0 +1,10 @@
+.wrap {
+  display: table;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+.signature-pad-wrapper {
+  border: 1px dashed grey;
+}
+
