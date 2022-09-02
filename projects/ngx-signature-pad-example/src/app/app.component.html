@@ -1,0 +1,30 @@
+<div class="wrap">
+  <div class="signature-pad-wrapper">
+    <signature-pad
+      #signaturePad
+      [options]      = "signaturePadOptions"
+      (onEndEvent)   = "drawComplete()"
+      (onBeginEvent) = "drawStart()"
+    ></signature-pad>
+  </div>
+
+  <br>
+
+  <button type="button" (click)="clearSign()" [attr.disabled]="!signature ? true : null">Clear Signature</button>
+  <br>
+  <br>
+  <button type="button" (click)="turnOn()">Turn On Signature Pad</button>
+  <br>
+  <br>
+  <button type="button" (click)="turnOff()">Turn Off Signature Pad</button>
+
+  <br>
+  <br>
+  <br>
+
+  <div style="font-size: 20px">
+    <strong>State:</strong> {{ isEmpty ? 'Empty' : 'Filled' }} <span *ngIf="isTurnOn !== undefined">and Turned {{ isTurnOn ? 'On' : 'Off' }}</span>
+  </div>
+</div>
+
+
