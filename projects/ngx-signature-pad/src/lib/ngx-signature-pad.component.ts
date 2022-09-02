@@ -39,8 +39,8 @@ export class SignaturePad implements AfterContentInit, OnDestroy {
     }
 
     this.signaturePad = new SignaturePadNative.default(canvas, this.options);
-    this.signaturePad.addEventListener('beginStroke', this.onBegin.bind(this), { once: true });
-    this.signaturePad.addEventListener('endStroke', this.onEnd.bind(this), { once: true });
+    this.signaturePad.addEventListener('beginStroke', this.onBegin.bind(this));
+    this.signaturePad.addEventListener('endStroke', this.onEnd.bind(this));
   }
 
   public ngOnDestroy(): void {
