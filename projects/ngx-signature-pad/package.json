@@ -1,6 +1,6 @@
 {
   "name": "@viablelogic/ngx-signature-pad",
-  "version": "5.0.3",
+  "version": "6.0.0",
   "description": "Angular Component wrapper for szimek / signature_pad",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
   "peerDependencies": {
     "@angular/common": "^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0",
     "@angular/core": "^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0",
-    "signature_pad": "4.0.7"
+    "signature_pad": "4.0.9"
   },
   "dependencies": {
     "tslib": "^2.0.0"
