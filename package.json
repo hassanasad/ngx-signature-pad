@@ -1,6 +1,6 @@
 {
   "name": "@viablelogic/ngx-signature-pad",
-  "version": "9.0.0",
+  "version": "10.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
