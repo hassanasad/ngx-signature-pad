@@ -1,6 +1,6 @@
 {
   "name": "@viablelogic/ngx-signature-pad",
-  "version": "10.0.1",
+  "version": "11.0.0",
   "description": "Angular Component wrapper for szimek / signature_pad",
   "repository": {
     "type": "git",
@@ -15,8 +15,8 @@
   "author": "Wulf Solter <wulf@wulf.co.nz> (http://wulf.co.nz)",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0",
-    "@angular/core": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0"
+    "@angular/common": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0",
+    "@angular/core": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0"
   },
   "dependencies": {
     "signature_pad": "4.0.9",
