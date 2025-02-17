@@ -10,8 +10,9 @@ export interface Point {
 export type PointGroup = Array<Point>;
 
 @Component({
-  template: '<canvas></canvas>',
-  selector: 'signature-pad',
+    template: '<canvas></canvas>',
+    selector: 'signature-pad',
+    standalone: false
 })
 export class SignaturePad implements AfterContentInit, OnDestroy {
   @Input() public options: any;

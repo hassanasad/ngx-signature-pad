@@ -46,12 +46,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ngx-signature-pad-example",
+            "outputPath": {
+              "base": "dist/ngx-signature-pad-example"
+            },
             "index": "projects/ngx-signature-pad-example/src/index.html",
-            "main": "projects/ngx-signature-pad-example/src/main.ts",
-            "polyfills": "projects/ngx-signature-pad-example/src/polyfills.ts",
+            "polyfills": [
+              "projects/ngx-signature-pad-example/src/polyfills.ts"
+            ],
             "tsConfig": "projects/ngx-signature-pad-example/tsconfig.app.json",
             "assets": [
               "projects/ngx-signature-pad-example/src/favicon.ico",
@@ -60,7 +63,8 @@
             "styles": [
               "projects/ngx-signature-pad-example/src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "projects/ngx-signature-pad-example/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -85,9 +89,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
