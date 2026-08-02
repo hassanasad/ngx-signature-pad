@@ -10,7 +10,7 @@ describe('NgxSignaturePadComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SignaturePad],
+      imports: [SignaturePad],
     }).compileComponents();
   });
 
@@ -28,8 +28,8 @@ describe('NgxSignaturePadComponent', () => {
 // Host that consumes the component exactly as a real app would: an output binding
 // whose handler mutates state rendered in the template.
 @Component({
+  imports: [SignaturePad],
   template: `<signature-pad (onEndEvent)="strokes = strokes + 1"></signature-pad><span class="strokes">{{ strokes }}</span>`,
-  standalone: false,
 })
 class HostComponent {
   strokes = 0;
@@ -38,7 +38,7 @@ class HostComponent {
 describe('NgxSignaturePadComponent (zoneless)', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SignaturePad, HostComponent],
+      imports: [HostComponent],
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
   });

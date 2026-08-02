@@ -12,8 +12,7 @@ export type PointGroup = Array<Point>;
 @Component({
     template: '<canvas></canvas>',
     selector: 'signature-pad',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignaturePad implements AfterContentInit, OnDestroy {
   public readonly options = input<any>({});

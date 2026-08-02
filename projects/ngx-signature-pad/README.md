@@ -9,9 +9,10 @@ Angular component for [szimek/signature_pad](https://www.npmjs.com/package/signa
 
 ## Compatibility
 
-Supports Angular 18–22. The component uses `OnPush` change detection with signal-based
-`input()`/`output()` and has no dependency on `zone.js`, so it works in both zone-based and
-[zoneless](https://angular.dev/guide/zoneless) applications (`provideZonelessChangeDetection()`).
+Supports Angular 20–22. `SignaturePad` is a standalone component using `OnPush` change
+detection with signal-based `input()`/`output()`, and has no dependency on `zone.js`, so it
+works in both zone-based and [zoneless](https://angular.dev/guide/zoneless) applications
+(`provideZonelessChangeDetection()`).
 
 ## Reference Implementation
 
@@ -27,16 +28,16 @@ Options are as per [szimek/signature_pad](https://www.npmjs.com/package/signatur
 * canvasHeight: height of the canvas (px)
 The above options are provided to avoid accessing the DOM directly from your component to adjust the canvas size.
 
-Add `SignaturePadModule` to a standalone component's `imports` (Angular's
-default), then query the component with a signal-based `viewChild()`:
+`SignaturePad` is a standalone component — add it to your component's
+`imports`, then query it with a signal-based `viewChild()`:
 
 ```typescript
 import { AfterViewInit, Component, viewChild } from '@angular/core';
-import { SignaturePad, SignaturePadModule } from '@viablelogic/ngx-signature-pad';
+import { SignaturePad } from '@viablelogic/ngx-signature-pad';
 
 @Component({
   selector: 'app-sign',
-  imports: [SignaturePadModule],
+  imports: [SignaturePad],
   template: `
     <signature-pad
       [options]="signaturePadOptions"
@@ -74,7 +75,7 @@ export class SignaturePadPage implements AfterViewInit {
 }
 ```
 
-> **NgModule-based apps:** instead of a standalone component, add
-> `SignaturePadModule` to your `@NgModule({ imports: [...] })` and declare the
-> component there. If you prefer the classic decorator query, `@ViewChild(SignaturePad)`
-> still works — the signal `viewChild()` above is just the current idiom.
+> **NgModule-based apps:** add `SignaturePad` (or the back-compat
+> `SignaturePadModule`) to your `@NgModule({ imports: [...] })`. If you prefer the
+> classic decorator query, `@ViewChild(SignaturePad)` still works — the signal
+> `viewChild()` above is just the current idiom.
