@@ -7,6 +7,12 @@ Angular component for [szimek/signature_pad](https://www.npmjs.com/package/signa
 ## Install
 `npm install @viablelogic/ngx-signature-pad`
 
+## Compatibility
+
+Supports Angular 18–22. The component uses `OnPush` change detection with signal-based
+`input()`/`output()` and has no dependency on `zone.js`, so it works in both zone-based and
+[zoneless](https://angular.dev/guide/zoneless) applications (`provideZonelessChangeDetection()`).
+
 ## Reference Implementation
 
 * [Live Demo](http://lathonez.com/angular2-signaturepad-demo/)

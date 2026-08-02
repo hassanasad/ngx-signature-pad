@@ -10,7 +10,7 @@
 
   <br>
 
-  <button type="button" (click)="clearSign()" [attr.disabled]="!signature ? true : null">Clear Signature</button>
+  <button type="button" (click)="clearSign()" [attr.disabled]="!signature() ? true : null">Clear Signature</button>
   <br>
   <br>
   <button type="button" (click)="turnOn()">Turn On Signature Pad</button>
@@ -24,8 +24,8 @@
 
   <div style="font-size: 20px">
     <strong>State:</strong> {{ isEmpty ? 'Empty' : 'Filled' }}
-    @if (isTurnOn !== undefined) {
-      <span>and Turned {{ isTurnOn ? 'On' : 'Off' }}</span>
+    @if (isTurnOn() !== undefined) {
+      <span>and Turned {{ isTurnOn() ? 'On' : 'Off' }}</span>
     }
   </div>
 </div>
