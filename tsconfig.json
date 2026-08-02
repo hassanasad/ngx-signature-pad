@@ -1,7 +1,11 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "esModuleInterop": true,
@@ -13,13 +17,15 @@
     "module": "es2020",
     "paths": {
       "ngx-signature-pad": [
-        "dist/ngx-signature-pad/ngx-signature-pad",
-        "dist/ngx-signature-pad"
+        "./dist/ngx-signature-pad/ngx-signature-pad",
+        "./dist/ngx-signature-pad"
       ]
     },
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "strictTemplates": true,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true
   }
 }

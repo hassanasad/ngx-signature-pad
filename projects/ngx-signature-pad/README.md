@@ -7,6 +7,13 @@ Angular component for [szimek/signature_pad](https://www.npmjs.com/package/signa
 ## Install
 `npm install @viablelogic/ngx-signature-pad`
 
+## Compatibility
+
+Supports Angular 20–22. `SignaturePad` is a standalone component using `OnPush` change
+detection with signal-based `input()`/`output()`, and has no dependency on `zone.js`, so it
+works in both zone-based and [zoneless](https://angular.dev/guide/zoneless) applications
+(`provideZonelessChangeDetection()`).
+
 ## Reference Implementation
 
 * [Live Demo](http://lathonez.com/angular2-signaturepad-demo/)
@@ -21,58 +28,54 @@ Options are as per [szimek/signature_pad](https://www.npmjs.com/package/signatur
 * canvasHeight: height of the canvas (px)
 The above options are provided to avoid accessing the DOM directly from your component to adjust the canvas size.
 
+`SignaturePad` is a standalone component — add it to your component's
+`imports`, then query it with a signal-based `viewChild()`:
+
 ```typescript
-
-// import into app module
-
-import { SignaturePadModule } from '@viablelogic/ngx-signature-pad';
-
-...
-
-@NgModule({
-  declarations: [ ],
-  imports: [ SignaturePadModule ],
-  providers: [ ],
-  bootstrap: [ AppComponent ]
-})
-
-// then import for use in a component
-
-import { Component, ViewChild } from '@angular/core';
-import { SignaturePad } from '@viablelogic/ngx-signature-pad/signature-pad';
+import { AfterViewInit, Component, viewChild } from '@angular/core';
+import { SignaturePad } from '@viablelogic/ngx-signature-pad';
 
 @Component({
-  template: '<signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>'
+  selector: 'app-sign',
+  imports: [SignaturePad],
+  template: `
+    <signature-pad
+      [options]="signaturePadOptions"
+      (onBeginEvent)="drawStart()"
+      (onEndEvent)="drawComplete()">
+    </signature-pad>
+  `,
 })
+export class SignaturePadPage implements AfterViewInit {
 
-export class SignaturePadPage{
+  // Signal-based view query — read it by calling the signal: this.signaturePad()
+  readonly signaturePad = viewChild<SignaturePad>(SignaturePad);
 
-  @ViewChild(SignaturePad) signaturePad: SignaturePad;
-
-  signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
-    'minWidth': 5,
-    'canvasWidth': 500,
-    'canvasHeight': 300
+  signaturePadOptions = { // passed through to the szimek/signature_pad constructor
+    minWidth: 5,
+    canvasWidth: 500,
+    canvasHeight: 300,
   };
 
-  constructor() {
-    // no-op
+  ngAfterViewInit(): void {
+    // the query is resolved once the view has initialized
+    this.signaturePad()?.set('minWidth', 5); // set a signature_pad option at runtime
+    this.signaturePad()?.clear();             // call any signature_pad API method
   }
 
-  ngAfterViewInit() {
-    // this.signaturePad is now available
-    this.signaturePad.set('minWidth', 5); // set szimek/signature_pad options at runtime
-    this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
+  drawComplete(): void {
+    // notified of signature_pad's onEnd event
+    console.log(this.signaturePad()?.toDataURL());
   }
 
-  drawComplete() {
-    // will be notified of szimek/signature_pad's onEnd event
-    console.log(this.signaturePad.toDataURL());
-  }
-
-  drawStart() {
-    // will be notified of szimek/signature_pad's onBegin event
+  drawStart(): void {
+    // notified of signature_pad's onBegin event
     console.log('begin drawing');
   }
 }
 ```
+
+> **NgModule-based apps:** add `SignaturePad` (or the back-compat
+> `SignaturePadModule`) to your `@NgModule({ imports: [...] })`. If you prefer the
+> classic decorator query, `@ViewChild(SignaturePad)` still works — the signal
+> `viewChild()` above is just the current idiom.

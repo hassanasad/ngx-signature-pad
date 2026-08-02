@@ -25,11 +25,24 @@
           }
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "main": "projects/ngx-signature-pad/src/test.ts",
             "tsConfig": "projects/ngx-signature-pad/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-signature-pad/karma.conf.js"
+            "buildTarget": "ngx-signature-pad:test-build",
+            "runner": "vitest",
+            "setupFiles": [
+              "projects/ngx-signature-pad/src/test-setup.ts"
+            ]
+          }
+        },
+        "test-build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "tsConfig": "projects/ngx-signature-pad/tsconfig.spec.json",
+            "polyfills": [],
+            "aot": false,
+            "optimization": false,
+            "extractLicenses": false
           }
         }
       }
@@ -52,9 +65,7 @@
               "base": "dist/ngx-signature-pad-example"
             },
             "index": "projects/ngx-signature-pad-example/src/index.html",
-            "polyfills": [
-              "projects/ngx-signature-pad-example/src/polyfills.ts"
-            ],
+            "polyfills": [],
             "tsConfig": "projects/ngx-signature-pad-example/tsconfig.app.json",
             "assets": [
               "projects/ngx-signature-pad-example/src/favicon.ico",
@@ -93,6 +104,12 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "testing": {
+              "aot": false,
+              "optimization": false,
+              "extractLicenses": false,
+              "polyfills": []
             }
           },
           "defaultConfiguration": "production"
@@ -116,20 +133,18 @@
           }
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "main": "projects/ngx-signature-pad-example/src/test.ts",
-            "polyfills": "projects/ngx-signature-pad-example/src/polyfills.ts",
             "tsConfig": "projects/ngx-signature-pad-example/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-signature-pad-example/karma.conf.js",
-            "assets": [
-              "projects/ngx-signature-pad-example/src/favicon.ico",
-              "projects/ngx-signature-pad-example/src/assets"
+            "reporters": [
+              "default"
             ],
-            "styles": [
-              "projects/ngx-signature-pad-example/src/styles.css"
+            "coverageReporters": [
+              "html",
+              "text-summary"
             ],
-            "scripts": []
+            "buildTarget": ":build:testing",
+            "runner": "vitest"
           }
         }
       }

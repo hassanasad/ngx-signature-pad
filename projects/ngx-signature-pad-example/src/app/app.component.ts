@@ -1,19 +1,20 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, viewChild, signal } from '@angular/core';
 import { SignaturePad } from 'ngx-signature-pad';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
 export class AppComponent {
   title = 'ngx-signature-pad-example';
 
-  @ViewChild('signaturePad') signaturePad: SignaturePad;
+  readonly signaturePad = viewChild<SignaturePad>('signaturePad');
 
-  signature: string;
-  isTurnOn : boolean;
+  readonly signature = signal<string | null>(null);
+  readonly isTurnOn = signal<boolean | undefined>(undefined);
 
   readonly signaturePadOptions = { // passed through to szimek/signature_pad constructor
 		minWidth    : 0.5,			 // Line size
@@ -26,13 +27,13 @@ export class AppComponent {
     console.log('drawing complete');
 
     // To use signature image as data URL
-    this.signature = this.signaturePad?.toDataURL();
+    this.signature.set(this.signaturePad()?.toDataURL() ?? null);
 	}
 
 
   clearSign(): void {
-		this.signature = null;
-		this.signaturePad?.clear();
+		this.signature.set(null);
+		this.signaturePad()?.clear();
 	}
 
 
@@ -42,19 +43,19 @@ export class AppComponent {
 
 
   turnOn(): void {
-    this.signaturePad?.on();
-    this.isTurnOn = true;
+    this.signaturePad()?.on();
+    this.isTurnOn.set(true);
   }
 
 
   turnOff(): void {
-    this.signaturePad?.off();
-    this.isTurnOn = false;
+    this.signaturePad()?.off();
+    this.isTurnOn.set(false);
   }
 
 
   get isEmpty(): boolean {
-    return this.signaturePad?.isEmpty();
+    return this.signaturePad()?.isEmpty() ?? true;
   }
 
 }

@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ElementRef, EventEmitter, Input, Output, OnDestroy } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, OnDestroy, ChangeDetectionStrategy, input, output } from '@angular/core';
 import * as SignaturePadNative from 'signature_pad';
 
 export interface Point {
@@ -12,45 +12,47 @@ export type PointGroup = Array<Point>;
 @Component({
     template: '<canvas></canvas>',
     selector: 'signature-pad',
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignaturePad implements AfterContentInit, OnDestroy {
-  @Input() public options: any;
-  @Output() public onBeginEvent = new EventEmitter<boolean>();
-  @Output() public onEndEvent = new EventEmitter<boolean>();
+  public readonly options = input<any>({});
+  public readonly onBeginEvent = output<boolean>();
+  public readonly onEndEvent = output<boolean>();
 
   private signaturePad: any;
   private elementRef: ElementRef;
 
   constructor(elementRef: ElementRef) {
-    // no op
     this.elementRef = elementRef;
-    this.options = this.options || {};
   }
 
   public ngAfterContentInit(): void {
     const canvas: any = this.elementRef.nativeElement.querySelector('canvas');
 
-    if ((this.options as any).canvasHeight) {
-      canvas.height = (this.options as any).canvasHeight;
+    if (this.options().canvasHeight) {
+      canvas.height = this.options().canvasHeight;
     }
 
-    if ((this.options as any).canvasWidth) {
-      canvas.width = (this.options as any).canvasWidth;
+    if (this.options().canvasWidth) {
+      canvas.width = this.options().canvasWidth;
     }
 
-    this.signaturePad = new SignaturePadNative.default(canvas, this.options);
+    this.signaturePad = new SignaturePadNative.default(canvas, this.options());
     this.signaturePad.addEventListener('beginStroke', this.onBegin.bind(this));
     this.signaturePad.addEventListener('endStroke', this.onEnd.bind(this));
   }
 
   public ngOnDestroy(): void {
     const canvas: any = this.elementRef.nativeElement.querySelector('canvas');
-    canvas.width = 0;
-    canvas.height = 0;
+    if (canvas) {
+      canvas.width = 0;
+      canvas.height = 0;
+    }
 
-    this.signaturePad.removeEventListener('beginStroke', this.onBegin);
-    this.signaturePad.removeEventListener('endStroke', this.onEnd);
+    if (this.signaturePad) {
+      this.signaturePad.removeEventListener('beginStroke', this.onBegin);
+      this.signaturePad.removeEventListener('endStroke', this.onEnd);
+    }
   }
 
   public resizeCanvas(): void {
@@ -89,12 +91,12 @@ export class SignaturePad implements AfterContentInit, OnDestroy {
     // set default height and width on read data from URL
     if (
       !options.hasOwnProperty('height') &&
-      (this.options as any).canvasHeight
+      this.options().canvasHeight
     ) {
-      options.height = (this.options as any).canvasHeight;
+      options.height = this.options().canvasHeight;
     }
-    if (!options.hasOwnProperty('width') && (this.options as any).canvasWidth) {
-      options.width = (this.options as any).canvasWidth;
+    if (!options.hasOwnProperty('width') && this.options().canvasWidth) {
+      options.width = this.options().canvasWidth;
     }
     this.signaturePad.fromDataURL(dataURL, options);
   }
@@ -104,9 +106,11 @@ export class SignaturePad implements AfterContentInit, OnDestroy {
     this.signaturePad.clear();
   }
 
-  // Returns true if canvas is empty, otherwise returns false
+  // Returns true if canvas is empty, otherwise returns false.
+  // Guards against being read (e.g. from a template binding) before
+  // ngAfterContentInit has initialized the underlying signature_pad.
   public isEmpty(): boolean {
-    return this.signaturePad.isEmpty();
+    return this.signaturePad ? this.signaturePad.isEmpty() : true;
   }
 
   // Unbinds all event handlers
